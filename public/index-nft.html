@@ -1,66 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic metadata and title of the webpage -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XRPL Experience - Claim your NFT</title>
 
+    <!-- Firebase Scripts: Used for database and other backend services -->
     <script defer src="/__/firebase/9.19.1/firebase-app-compat.js"></script>
     <script defer src="/__/firebase/9.19.1/firebase-database-compat.js"></script>
     <script defer src="/__/firebase/9.19.1/firebase-firestore-compat.js"></script>
     <script defer src="/__/firebase/9.19.1/firebase-functions-compat.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
+    <!-- Bootstrap CSS for styling and layout -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome CSS for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
+    <!-- Additional Custom Styles -->
     <style>
-        body {
-            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-            color: #E0E1DD;
-        }
-        .btn {
-            background-color: #171619;
-            color: #E0E1DD;
-        }
-        h1.header {
-          margin-top: 20px;
-        }
-        .btn img {
-            width: 30px;
-            height: 30px;
-            margin-right: 2px;
-        }
-        .hide {
-            display: none;
-        }
-        footer {
-          position: fixed;
-          left: 0;
-          bottom: 0;
-          width: 100%;
-          background-color: #000000;
-          color: white;
-          text-align: center;
-          padding: 10px 0;
-        }
+        /* ... */
     </style>
 </head>
 <body>
+    <!-- Main content of the page inside a Bootstrap container for alignment -->
     <div class="container h-100">
         <div class="row h-100 justify-content-center align-items-center">
             <div class="text-center">
+                <!-- Hidden elements (for potential use later) -->
                 <h1 id="addressArea" class="hide"></h1>
                 <p id="xrplMsg" class="hide"></p>
                 <h1 class="header">NFT Acquisition 🚀</h1>
                 <p>As part of our Interactive XRPL Office Learning Experience, you have the chance to acquire your AI generated 🤖 XRPL NFT!</p>
                 <p>Click the button to claim your weekly NFT and a chance to receive $20 Gift Card 🎉</p>
+                <!-- Button to initiate NFT claiming process -->
                 <button class="btn btn-lg" id="getNFT"><i class="fas fa-gift"></i> Claim NFT</button>
+                <!-- Placeholder for error messages -->
                 <div class="alert alert-danger hide" id="errorMessage" role="alert"></div>
+                <!-- Logout button (hidden initially) -->
                 <button class="btn btn-secondary btn-sm mt-3 hide" id="logout">Logout</button>
             </div>
         </div>
     </div>
+
+    <!-- Footer with a link to more information about XRPL NFTs -->
     <footer>
         <a href="https://xrpl.org/nftokencreateoffer.html?utm_source=workshop&utm_medium=jason-morgan-state-mar-23&utm_campaign=dev-advocacy" style="color: #E0E1DD;">Learn More About XRPL NFTs</a>
     </footer>

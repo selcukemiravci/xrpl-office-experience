@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Basic metadata and title of the webpage -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>XRPL Experience - Receive XRP</title>
 
+    <!-- Firebase Scripts: Used for database and other backend services -->
     <script defer src="/__/firebase/9.19.1/firebase-app-compat.js"></script>
     <script defer src="/__/firebase/9.19.1/firebase-database-compat.js"></script>
     <script defer src="/__/firebase/9.19.1/firebase-firestore-compat.js"></script>
     <script defer src="/__/firebase/9.19.1/firebase-functions-compat.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
     
+    <!-- Bootstrap CSS for styling and layout -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Additional Custom Styles -->
     <style>
         body {
             background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); /* Multicolor gradient background */
@@ -42,17 +47,27 @@
     </style>
   </head>
   <body>
+    <!-- Main content of the page inside a Bootstrap container for alignment -->
     <div class="container h-100">
-        <div class="row h-100 justify-content-center align-items-center">
-            <div class="text-center">
-                <h1 class="header" id="addressArea">Wallet Activation 💰</h1>
-                <p class="mb-4" id="xrplMsg">This is part of our XRPL Blockchain Learning Experience. Every employee gets 11 XRP for wallet activation. Please click the button below to receive your XRP 🥳</p>
-                <button class="btn btn-lg" id="xrpButton"><img src="https://cdn-icons-png.flaticon.com/512/4821/4821657.png" alt="XRP Logo"> Receive XRP</button>
-                <div class="alert alert-danger d-none" id="errorMessage" role="alert"></div>
-                <button type="button" class="btn btn-secondary btn-sm mt-3 d-none" id="logout">Logout</button>
-            </div>
-        </div>
-    </div>
+      <div class="row h-100 justify-content-center align-items-center">
+          <div class="text-center">
+              <!-- Wallet Activation section -->
+              <h1 class="header" id="addressArea">Wallet Activation 💰</h1>
+              <!-- Information about the XRPL Experience -->
+              <p class="mb-4" id="xrplMsg">As part of our Interactive XRPL Office Learning Experience, you have the opportunity to get 11 XRP for your XUMM wallet activation.</p>
+              <!-- Instruction for the user -->
+              <p>Please click the button below to receive your XRP 🥳</p>
+              <!-- Button to initiate XRP receiving process -->
+              <button class="btn btn-lg" id="xrpButton"><img src="https://cdn-icons-png.flaticon.com/512/4821/4821657.png" alt="XRP Logo"> Receive XRP</button>
+              <!-- Placeholder for error messages -->
+              <div class="alert alert-danger d-none" id="errorMessage" role="alert"></div>
+              <!-- Logout button (hidden initially) -->
+              <button type="button" class="btn btn-secondary btn-sm mt-3 d-none" id="logout">Logout</button>
+          </div>
+      </div>
+  </div>
+  
+    <!-- Footer with a link to more information about XRPL -->
     <footer>
         <a href="https://xrpl.org/docs.html?utm_source=workshop&utm_medium=jason-morgan-state-mar-23&utm_campaign=dev-advocacy#reserves" style="color: #E0E1DD;">Learn More About XRPL</a>
     </footer>
