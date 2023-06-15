@@ -15,53 +15,33 @@
     
     <!-- Bootstrap CSS for styling and layout -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Additional Custom Styles -->
-    <style>
-        body {
-            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); /* Multicolor gradient background */
-            color: #E0E1DD;
-        }
-        .btn {
-            background-color: #171619;
-            color: #E0E1DD;
-        }
-        h1.header {
-          margin-top: 20px;
-        }
-        .btn img {
-            width: 30px;
-            height: 30px;
-            margin-right: 2px;
-        }
-        footer {
-          position: fixed;
-          left: 0;
-          bottom: 0;
-          width: 100%;
-          background-color: #000000;
-          color: white;
-          text-align: center;
-          padding: 10px 0;
-        }
-    </style>
+
+    <!-- Font Awesome CSS for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+    <!-- Link to the separate CSS file -->
+    <link rel="stylesheet" type="text/css" href="styles.css"></head>
   </head>
   <body>
+    <div class="container h-100 custom-container">
     <!-- Main content of the page inside a Bootstrap container for alignment -->
     <div class="container h-100">
-      <div class="row h-100 justify-content-center align-items-center">
-          <div class="text-center">
+      <div class="container custom-container">
+        <div class="d-flex flex-column justify-content-between custom-content">
 
-              <h1 class="header" id="addressArea">Wallet Activation 💰</h1>
-              <p class="mb-4" id="xrplMsg">As part of our Interactive XRPL Office Learning Experience, you have the opportunity to get 11 XRP for your XUMM wallet activation.</p>
-              <p>Please click the button below to receive your XRP 🥳</p>
-              <!-- Button to initiate XRP receiving process -->
+              <h1 class="header custom-header" id="addressArea">Wallet Activation 💰</h1>
+              <div class="text-center">
+                <p class="mb-4" id="xrplMsg">As part of our Interactive XRPL Office Learning Experience, you have the opportunity to get XRP for your XUMM wallet activation.</p>
+                <p>Please click the button below to receive your XRP 🥳</p>
+              </div>
+              <!-- Button to initiate NFT claiming process -->
+              <div class="text-center">
               <button class="btn btn-lg" id="xrpButton"><img src="https://cdn-icons-png.flaticon.com/512/4821/4821657.png" alt="XRP Logo"> Receive XRP</button>
+              </div>
               <!-- Placeholder for error messages -->
               <div class="alert alert-danger d-none" id="errorMessage" role="alert"></div>
               <!-- Logout button (hidden initially) -->
               <button type="button" class="btn btn-secondary btn-sm mt-3 d-none" id="logout">Logout</button>
-              
           </div>
       </div>
   </div>
