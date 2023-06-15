@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>XRPL Experience - Receive XRP</title>
+
+    <script defer src="/__/firebase/9.19.1/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/9.19.1/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/9.19.1/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/9.19.1/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); /* Multicolor gradient background */
+            color: #E0E1DD;
+        }
+        .btn {
+            background-color: #171619;
+            color: #E0E1DD;
+        }
+        h1.header {
+          margin-top: 20px;
+        }
+        .btn img {
+            width: 30px;
+            height: 30px;
+            margin-right: 2px;
+        }
+        footer {
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          background-color: #000000;
+          color: white;
+          text-align: center;
+          padding: 10px 0;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="text-center">
+                <h1 class="header" id="addressArea">Wallet Activation 💰</h1>
+                <p class="mb-4" id="xrplMsg">This is part of our XRPL Blockchain Learning Experience. Every employee gets 11 XRP for wallet activation. Please click the button below to receive your XRP 🥳</p>
+                <button class="btn btn-lg" id="xrpButton"><img src="https://cdn-icons-png.flaticon.com/512/4821/4821657.png" alt="XRP Logo"> Receive XRP</button>
+                <div class="alert alert-danger d-none" id="errorMessage" role="alert"></div>
+                <button type="button" class="btn btn-secondary btn-sm mt-3 d-none" id="logout">Logout</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <a href="https://xrpl.org/docs.html?utm_source=workshop&utm_medium=jason-morgan-state-mar-23&utm_campaign=dev-advocacy#reserves" style="color: #E0E1DD;">Learn More About XRPL</a>
+    </footer>
+
+    <script type="module">
+      import 'https://xumm.app/assets/cdn/xumm-oauth2-pkce.min.js?v=2.7.1'
+
+      function startLoadingMessage() {
+        const loadingMessageElement = document.getElementById("xrplMsg");
+        loadingMessageElement.innerText = "Sending...";
+      }
+
+      function stopLoadingMessage() {
+        document.getElementById("xrplMsg").innerText = "";
+      }      
+
+      function redirectToXRPLDocs() {
+        setTimeout(function () {
+        window.location.href = "https://xrpl.org/docs.html?utm_source=workshop&utm_medium=jason-morgan-state-mar-23&utm_campaign=dev-advocacy#reserves"; 
+        }, 15000); //will call the function after 15 secs.      
+      }      
+
+      function showError(message) {
+            var errorMessageElement = document.getElementById('errorMessage');
+            errorMessageElement.innerHTML = message;
+            errorMessageElement.classList.remove('d-none');
+      }      
+
+      const xumm = new XummPkce('<your XUMM API key>', {
+        implicit: true, // Implicit: allows to e.g. move from social browser to stock browser
+        redirectUrl: document.location.href
+      })
+
+      document.getElementById('getXRP').onclick = () => {
+        startLoadingMessage();
+        document.getElementById('logout').classList.remove('d-none');
+        xumm.authorize().catch(e => console.log('e', e))
+      }
+
+      document.getElementById('logout').onclick = () => {
+        xumm.logout();
+        document.getElementById('addressArea').innerText = '';
+        document.getElementById('addressArea').classList.add('d-none');
+        document.getElementById('xrplMsg').innerText = '';
+        document.getElementById('xrplMsg').classList.add('d-none');
+        document.getElementById('errorMessage').classList.add('d-none');
+        document.getElementById('logout').classList.add('d-none');
+        document.getElementById('getXRP').classList.remove('d-none');  
+      }           
+
+      xumm.on("error", (error) => {
+        console.log("error", error)
+      })
+
+      xumm.on("success", async () => {
+        startLoadingMessage();
+        console.log("Success")
+        const state = await xumm.state() 
+        document.getElementById('addressArea').innerText = state?.me?.sub
+        document.getElementById('getXRP').classList.add('d-none');
+
+        if ( state?.me ) {
+          const sendXRP = firebase.functions().httpsCallable('sendXRP');
+          try {
+            const result = await sendXRP({ address: state?.me?.sub });
+            stopLoadingMessage();
+            document.getElementById('xrplMsg').innerText = "15 XRP has been sent to your account."
+
+            redirectToXRPLDocs();
+          } catch (error) {
+            console.log(error);
+            console.log(error.code);
+            stopLoadingMessage();
+            showError(error.message)
+          }
+                 
+        }        
+      })
+
+      xumm.on("retrieved", async () => {
+        console.log("Retrieved: from localStorage or mobile browser redirect")
+        const state = await xumm.state()
+        document.getElementById('addressArea').innerText = state?.me?.sub    
+        document.getElementById('logout').classList.remove('d-none');    
+        redirectToXRPLDocs();
+      })
+    </script>    
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+
+        try {
+          let app = firebase.app();
+          let features = [
+            'auth', 
+            'database', 
+            'firestore',
+            'functions',
+            'messaging', 
+            'storage', 
+            'analytics', 
+            'remoteConfig',
+            'performance',
+          ].filter(feature => typeof app[feature] === 'function');
+          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script> 
+  </body>
+</html>
