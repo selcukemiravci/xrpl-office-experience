@@ -21,14 +21,43 @@
 
     <!-- Additional Custom Styles -->
     <style>
-        /* ... */
-    </style>
+      body {
+          background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+          color: #E0E1DD;
+      }
+      .btn {
+          background-color: #171619;
+          color: #E0E1DD;
+      }
+      h1.header {
+        margin-top: 20px;
+      }
+      .btn img {
+          width: 30px;
+          height: 30px;
+          margin-right: 2px;
+      }
+      .hide {
+          display: none;
+      }
+      footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #000000;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+      }
+  </style>
 </head>
 <body>
     <!-- Main content of the page inside a Bootstrap container for alignment -->
     <div class="container h-100">
         <div class="row h-100 justify-content-center align-items-center">
             <div class="text-center">
+
                 <!-- Hidden elements (for potential use later) -->
                 <h1 id="addressArea" class="hide"></h1>
                 <p id="xrplMsg" class="hide"></p>
@@ -41,6 +70,7 @@
                 <div class="alert alert-danger hide" id="errorMessage" role="alert"></div>
                 <!-- Logout button (hidden initially) -->
                 <button class="btn btn-secondary btn-sm mt-3 hide" id="logout">Logout</button>
+
             </div>
         </div>
     </div>
