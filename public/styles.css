@@ -1,10 +1,9 @@
 body, html {
-  height: 100%; /* Make sure the body and html cover full viewport height */
-  background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-  color: #E0E1DD;
+  height: 100%; /* Full viewport height */
   display: flex;
   flex-direction: column; /* Stack children vertically */
-  justify-content: space-between; /* distribute items evenly, with equal space around them */
+  background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+  color: #E0E1DD;
 }
 
 .btn {
@@ -22,20 +21,27 @@ body, html {
   display: none;
 }
 
+#content {
+  flex: 1 0 auto; /* Flex grow, shrink, basis */
+  display: flex;
+  flex-direction: column;
+}
+
 footer {
+  flex-shrink: 0; /* Prevents the footer from shrinking */
+  width: 100%; /* Full width */
   text-align: center;
   background-color: #000000;
   color: white;
   padding: 10px 0;
 }
-
 .container {
+  flex-grow: 1; /* It will take up any remaining space */
   display: flex;
   flex-direction: column; /* Stack children vertically */
   justify-content: space-between; /* distribute items evenly, with equal space around them */
-  height: calc(100vh - 60px); /* Deduct the height of footer */
-  margin-top: 20px; /* Add some top margin */
 }
+
 .header {
   display: flex;
   justify-content: center; /* Horizontally center children */
@@ -70,7 +76,8 @@ body {
   padding: 15px 30px; /* Adjust button padding */
 }
 footer {
-  padding: 20px 0; /* Increase footer padding */
+  font-size: 1.0em; /* Change according to your needs */
+  padding: 20px 0;
 }
 }
 
@@ -87,6 +94,7 @@ body {
   padding: 16px 32px;
 }
 footer {
+  font-size: 0.9em; /* Change according to your needs */
   padding: 18px 0;
 }
 }
@@ -104,7 +112,8 @@ body {
   padding: 14px 28px;
 }
 footer {
-  padding: 16px 0;
+  font-size: 0.8em; /* Change according to your needs */
+  padding: 14px 0;
 }
 }
 
