@@ -12,7 +12,7 @@ admin.initializeApp();
 
 exports.claimNFT = functions.https.onCall(async (data, context) => {
   const taxonid = data.taxonid;
-  const wallet = xrpl.Wallet.fromSeed("sEdSSHPhkcuxY8bvbJoC58pWfUgNLkm");
+  const wallet = xrpl.Wallet.fromSeed("sEdT1MP2nEc3skn2VdSJ8U7E9cTfeVZ");
 
   const client = new xrpl.Client("wss://s.altnet.rippletest.net:51233/");
   await client.connect();
