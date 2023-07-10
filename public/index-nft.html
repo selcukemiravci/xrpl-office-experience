@@ -95,13 +95,13 @@
 
       document.getElementById('logout').onclick = () => {
         xumm.logout();
-        document.getElementById('addressArea').innerText = '';
+        document.getElementById('addressArea').innerText = 'NFT Acquisition 🚀';
         document.getElementById('addressArea').classList.add('d-none');
-        document.getElementById('xrplMsg').innerText = '';
+        document.getElementById('xrplMsg').innerText = 'Click the button to claim your weekly NFT and a chance to receive $20 Gift Card 🎉';
         document.getElementById('xrplMsg').classList.add('d-none');
         document.getElementById('errorMessage').classList.add('d-none');
         document.getElementById('logout').classList.add('d-none');
-        document.getElementById('getNFT').classList.remove('d-none');  
+        document.getElementById('getNFT').classList.remove('inline-none');  
       }           
 
       xumm.on("error", (error) => {
